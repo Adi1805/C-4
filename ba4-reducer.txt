@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+import sys
+
+male_age_sum = 0
+male_count = 0
+class_deaths = {}
+
+for line in sys.stdin:
+    key, value = line.strip().split('\t')
+    
+    if key == "male":
+        try:
+            age = float(value)
+            male_age_sum += age
+            male_count += 1
+        except ValueError:
+            continue
+    elif key.startswith("class_"):
+        if key in class_deaths:
+            class_deaths[key] += 1
+        else:
+            class_deaths[key] = 1
+
+if male_count > 0:
+    avg_age = male_age_sum / male_count
+    print(f"Average age of deceased males: {avg_age:.2f}")
+
+for cls in sorted(class_deaths):
+    formatted_class = cls.replace('class_', 'Class ')
+    print(f"{formatted_class} female deaths: {class_deaths[cls]}")

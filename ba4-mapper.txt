@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+import sys
+
+for line in sys.stdin:
+    if line.startswith("PassengerId"):
+        continue
+        
+    fields = line.strip().split(',')
+    
+    if len(fields) < 6:
+        continue
+        
+    survived = fields[1]
+    pclass = fields[2]
+    sex = fields[4].lower()
+    age = fields[5]
+    
+    if survived == '0': # only for those who died
+        if sex == 'male' and age:
+            print(f"male\t{age}")
+        elif sex == 'female':
+            print(f"class_{pclass}\t1")
