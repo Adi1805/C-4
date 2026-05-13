@@ -1,0 +1,6 @@
+hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
+-files mapper.py,reducer.py \
+-mapper ./mapper.py \
+-reducer ./reducer.py \
+-input /input_grades/students.txt \
+-output /output_grades
